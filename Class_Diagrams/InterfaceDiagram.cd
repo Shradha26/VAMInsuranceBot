@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="VAMInsuranceBot.Dialog.IDialog.IAccidentDialog">
+    <Position X="2.75" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAQAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Dialog\IDialog\IAccidentDialog.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="VAMInsuranceBot.Dialog.IDialog.IDamagePictureDialog">
+    <Position X="2.75" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAgBAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Dialog\IDialog\IDamagePictureDialog.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="VAMInsuranceBot.Dialog.IDialog.IDefaultDialog">
+    <Position X="0.5" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAEAgAAAAABAAACAAAAAAAAAAgACAAAAAAAAAA=</HashCode>
+      <FileName>Dialog\IDialog\IDefaultDialog.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="VAMInsuranceBot.Dialog.IDialog.IDriverDialog">
+    <Position X="7" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAABAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Dialog\IDialog\IDriverDialog.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="VAMInsuranceBot.Dialog.IDialog.IEditDamageDialog">
+    <Position X="5" Y="4" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAQA=</HashCode>
+      <FileName>Dialog\IDialog\IEditDamageDialog.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="VAMInsuranceBot.Dialog.IDialog.IEditTheftDialog">
+    <Position X="5" Y="5.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dialog\IDialog\IEditTheftDialog.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="VAMInsuranceBot.Dialog.IDialog.ITheftDialog">
+    <Position X="9" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEACAEAAAAAAAAA=</HashCode>
+      <FileName>Dialog\IDialog\ITheftDialog.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="VAMInsuranceBot.Dialog.IDialog.ITheftPictureDialog">
+    <Position X="0.5" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dialog\IDialog\ITheftPictureDialog.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="VAMInsuranceBot.Dialog.IDialog.IVehicleDialog">
+    <Position X="5" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAgBAAAAAAAAAAAAAAAAAAAAAAAQQAAA=</HashCode>
+      <FileName>Dialog\IDialog\IVehicleDialog.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

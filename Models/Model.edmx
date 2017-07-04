@@ -1,0 +1,739 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="VAMInsuranceBot.Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="accident">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Third Party" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="claim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PId" Type="int" Nullable="false" />
+          <Property Name="Claim Number" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Claim Date" Type="date" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="ClientId" />
+          </Key>
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Pin" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="Father's Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date of Birth" Type="date" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="Phone Number" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="PAN Number" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="driver">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Relation" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="License Number" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Injured" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="policy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="Policy Number" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Policy Type" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="Starting Date" Type="date" Nullable="false" />
+          <Property Name="Date of Expiration" Type="date" Nullable="false" />
+          <Property Name="Claim Filed" Type="bit" Nullable="false" />
+          <Property Name="Renew Filed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="renew">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Renewal Number" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="theft">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="7" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="third_party">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Registration Number" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="License Number" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Injured" Type="bit" Nullable="false" />
+          <Property Name="FIR Filed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vehicle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Registration Number" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="Make" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Class" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="verification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="otp" Type="nchar" MaxLength="8" Nullable="false" />
+          <Property Name="ver_status" Type="bit" Nullable="false" />
+          <Property Name="time_stamp" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_accident_claim_ToTable">
+          <End Role="claim" Type="Self.claim" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="accident" Type="Self.accident" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="claim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="accident">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_claim_policy_ToTable">
+          <End Role="policy" Type="Self.policy" Multiplicity="1" />
+          <End Role="claim" Type="Self.claim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="policy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="claim">
+              <PropertyRef Name="PId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_driver_claim_ToTable">
+          <End Role="claim" Type="Self.claim" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="driver" Type="Self.driver" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="claim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="driver">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_renew_policy_ToTable">
+          <End Role="policy" Type="Self.policy" Multiplicity="1" />
+          <End Role="renew" Type="Self.renew" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="policy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="renew">
+              <PropertyRef Name="PId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_theft_claim_ToTable">
+          <End Role="claim" Type="Self.claim" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="theft" Type="Self.theft" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="claim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="theft">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_third_party_claim_ToTable">
+          <End Role="claim" Type="Self.claim" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="third_party" Type="Self.third_party" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="claim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="third_party">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vehicle_claim_ToTable">
+          <End Role="claim" Type="Self.claim" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="vehicle" Type="Self.vehicle" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="claim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vehicle">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_verification_data_client_ToTable">
+          <End Role="client" Type="Self.client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="verification" Type="Self.verification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="verification">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCD_policy_client_ToTable">
+          <End Role="client" Type="Self.client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="policy" Type="Self.policy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="policy">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VAMInsuranceBotModelsStoreContainer">
+          <EntitySet Name="accident" EntityType="Self.accident" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="claim" EntityType="Self.claim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="client" EntityType="Self.client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="driver" EntityType="Self.driver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="policy" EntityType="Self.policy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="renew" EntityType="Self.renew" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="theft" EntityType="Self.theft" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="third_party" EntityType="Self.third_party" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vehicle" EntityType="Self.vehicle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="verification" EntityType="Self.verification" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_accident_claim_ToTable" Association="Self.FK_accident_claim_ToTable">
+            <End Role="claim" EntitySet="claim" />
+            <End Role="accident" EntitySet="accident" />
+          </AssociationSet>
+          <AssociationSet Name="FK_claim_policy_ToTable" Association="Self.FK_claim_policy_ToTable">
+            <End Role="policy" EntitySet="policy" />
+            <End Role="claim" EntitySet="claim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_driver_claim_ToTable" Association="Self.FK_driver_claim_ToTable">
+            <End Role="claim" EntitySet="claim" />
+            <End Role="driver" EntitySet="driver" />
+          </AssociationSet>
+          <AssociationSet Name="FK_renew_policy_ToTable" Association="Self.FK_renew_policy_ToTable">
+            <End Role="policy" EntitySet="policy" />
+            <End Role="renew" EntitySet="renew" />
+          </AssociationSet>
+          <AssociationSet Name="FK_theft_claim_ToTable" Association="Self.FK_theft_claim_ToTable">
+            <End Role="claim" EntitySet="claim" />
+            <End Role="theft" EntitySet="theft" />
+          </AssociationSet>
+          <AssociationSet Name="FK_third_party_claim_ToTable" Association="Self.FK_third_party_claim_ToTable">
+            <End Role="claim" EntitySet="claim" />
+            <End Role="third_party" EntitySet="third_party" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vehicle_claim_ToTable" Association="Self.FK_vehicle_claim_ToTable">
+            <End Role="claim" EntitySet="claim" />
+            <End Role="vehicle" EntitySet="vehicle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_verification_data_client_ToTable" Association="Self.FK_verification_data_client_ToTable">
+            <End Role="client" EntitySet="client" />
+            <End Role="verification" EntitySet="verification" />
+          </AssociationSet>
+          <AssociationSet Name="FKCD_policy_client_ToTable" Association="Self.FKCD_policy_client_ToTable">
+            <End Role="client" EntitySet="client" />
+            <End Role="policy" EntitySet="policy" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VAMInsuranceBot.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ModelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accidents" EntityType="VAMInsuranceBot.Models.accident" />
+          <EntitySet Name="claims" EntityType="VAMInsuranceBot.Models.claim" />
+          <EntitySet Name="clients" EntityType="VAMInsuranceBot.Models.client" />
+          <EntitySet Name="drivers" EntityType="VAMInsuranceBot.Models.driver" />
+          <EntitySet Name="policies" EntityType="VAMInsuranceBot.Models.policy" />
+          <EntitySet Name="renews" EntityType="VAMInsuranceBot.Models.renew" />
+          <EntitySet Name="thefts" EntityType="VAMInsuranceBot.Models.theft" />
+          <EntitySet Name="third_party" EntityType="VAMInsuranceBot.Models.third_party" />
+          <EntitySet Name="vehicles" EntityType="VAMInsuranceBot.Models.vehicle" />
+          <EntitySet Name="verifications" EntityType="VAMInsuranceBot.Models.verification" />
+          <AssociationSet Name="FK_accident_claim_ToTable" Association="VAMInsuranceBot.Models.FK_accident_claim_ToTable">
+            <End Role="claim" EntitySet="claims" />
+            <End Role="accident" EntitySet="accidents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_claim_policy_ToTable" Association="VAMInsuranceBot.Models.FK_claim_policy_ToTable">
+            <End Role="policy" EntitySet="policies" />
+            <End Role="claim" EntitySet="claims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_driver_claim_ToTable" Association="VAMInsuranceBot.Models.FK_driver_claim_ToTable">
+            <End Role="claim" EntitySet="claims" />
+            <End Role="driver" EntitySet="drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_theft_claim_ToTable" Association="VAMInsuranceBot.Models.FK_theft_claim_ToTable">
+            <End Role="claim" EntitySet="claims" />
+            <End Role="theft" EntitySet="thefts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_third_party_claim_ToTable" Association="VAMInsuranceBot.Models.FK_third_party_claim_ToTable">
+            <End Role="claim" EntitySet="claims" />
+            <End Role="third_party" EntitySet="third_party" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vehicle_claim_ToTable" Association="VAMInsuranceBot.Models.FK_vehicle_claim_ToTable">
+            <End Role="claim" EntitySet="claims" />
+            <End Role="vehicle" EntitySet="vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_verification_data_client_ToTable" Association="VAMInsuranceBot.Models.FK_verification_data_client_ToTable">
+            <End Role="client" EntitySet="clients" />
+            <End Role="verification" EntitySet="verifications" />
+          </AssociationSet>
+          <AssociationSet Name="FKCD_policy_client_ToTable" Association="VAMInsuranceBot.Models.FKCD_policy_client_ToTable">
+            <End Role="client" EntitySet="clients" />
+            <End Role="policy" EntitySet="policies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_renew_policy_ToTable" Association="VAMInsuranceBot.Models.FK_renew_policy_ToTable">
+            <End Role="policy" EntitySet="policies" />
+            <End Role="renew" EntitySet="renews" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="accident">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Third_Party" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="claim" Relationship="VAMInsuranceBot.Models.FK_accident_claim_ToTable" FromRole="accident" ToRole="claim" />
+        </EntityType>
+        <EntityType Name="claim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PId" Type="Int32" Nullable="false" />
+          <Property Name="Claim_Number" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Claim_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="accident" Relationship="VAMInsuranceBot.Models.FK_accident_claim_ToTable" FromRole="claim" ToRole="accident" />
+          <NavigationProperty Name="policy" Relationship="VAMInsuranceBot.Models.FK_claim_policy_ToTable" FromRole="claim" ToRole="policy" />
+          <NavigationProperty Name="driver" Relationship="VAMInsuranceBot.Models.FK_driver_claim_ToTable" FromRole="claim" ToRole="driver" />
+          <NavigationProperty Name="theft" Relationship="VAMInsuranceBot.Models.FK_theft_claim_ToTable" FromRole="claim" ToRole="theft" />
+          <NavigationProperty Name="third_party" Relationship="VAMInsuranceBot.Models.FK_third_party_claim_ToTable" FromRole="claim" ToRole="third_party" />
+          <NavigationProperty Name="vehicle" Relationship="VAMInsuranceBot.Models.FK_vehicle_claim_ToTable" FromRole="claim" ToRole="vehicle" />
+        </EntityType>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="ClientId" />
+          </Key>
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Pin" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="Father_s_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_of_Birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_Number" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PAN_Number" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="verifications" Relationship="VAMInsuranceBot.Models.FK_verification_data_client_ToTable" FromRole="client" ToRole="verification" />
+          <NavigationProperty Name="policies" Relationship="VAMInsuranceBot.Models.FKCD_policy_client_ToTable" FromRole="client" ToRole="policy" />
+        </EntityType>
+        <EntityType Name="driver">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Relation" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="License_Number" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Injured" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="claim" Relationship="VAMInsuranceBot.Models.FK_driver_claim_ToTable" FromRole="driver" ToRole="claim" />
+        </EntityType>
+        <EntityType Name="policy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="Policy_Number" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Policy_Type" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="Starting_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Date_of_Expiration" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Claim_Filed" Type="Boolean" Nullable="false" />
+          <Property Name="Renew_Filed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="claims" Relationship="VAMInsuranceBot.Models.FK_claim_policy_ToTable" FromRole="policy" ToRole="claim" />
+          <NavigationProperty Name="client" Relationship="VAMInsuranceBot.Models.FKCD_policy_client_ToTable" FromRole="policy" ToRole="client" />
+          <NavigationProperty Name="renews" Relationship="VAMInsuranceBot.Models.FK_renew_policy_ToTable" FromRole="policy" ToRole="renew" />
+        </EntityType>
+        <EntityType Name="renew">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Renewal_Number" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="policy" Relationship="VAMInsuranceBot.Models.FK_renew_policy_ToTable" FromRole="renew" ToRole="policy" />
+        </EntityType>
+        <EntityType Name="theft">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="claim" Relationship="VAMInsuranceBot.Models.FK_theft_claim_ToTable" FromRole="theft" ToRole="claim" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="third_party">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Registration_Number" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="License_Number" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Injured" Type="Boolean" Nullable="false" />
+          <Property Name="FIR_Filed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="claim" Relationship="VAMInsuranceBot.Models.FK_third_party_claim_ToTable" FromRole="third_party" ToRole="claim" />
+        </EntityType>
+        <EntityType Name="vehicle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Registration_Number" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="Make" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Class" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="claim" Relationship="VAMInsuranceBot.Models.FK_vehicle_claim_ToTable" FromRole="vehicle" ToRole="claim" />
+        </EntityType>
+        <EntityType Name="verification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="otp" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="ver_status" Type="Boolean" Nullable="false" />
+          <Property Name="time_stamp" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="client" Relationship="VAMInsuranceBot.Models.FK_verification_data_client_ToTable" FromRole="verification" ToRole="client" />
+        </EntityType>
+        <Association Name="FK_accident_claim_ToTable">
+          <End Type="VAMInsuranceBot.Models.claim" Role="claim" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="VAMInsuranceBot.Models.accident" Role="accident" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="claim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="accident">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_claim_policy_ToTable">
+          <End Type="VAMInsuranceBot.Models.policy" Role="policy" Multiplicity="1" />
+          <End Type="VAMInsuranceBot.Models.claim" Role="claim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="policy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="claim">
+              <PropertyRef Name="PId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_driver_claim_ToTable">
+          <End Type="VAMInsuranceBot.Models.claim" Role="claim" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="VAMInsuranceBot.Models.driver" Role="driver" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="claim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="driver">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_theft_claim_ToTable">
+          <End Type="VAMInsuranceBot.Models.claim" Role="claim" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="VAMInsuranceBot.Models.theft" Role="theft" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="claim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="theft">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_third_party_claim_ToTable">
+          <End Type="VAMInsuranceBot.Models.claim" Role="claim" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="VAMInsuranceBot.Models.third_party" Role="third_party" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="claim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="third_party">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vehicle_claim_ToTable">
+          <End Type="VAMInsuranceBot.Models.claim" Role="claim" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="VAMInsuranceBot.Models.vehicle" Role="vehicle" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="claim">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vehicle">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_verification_data_client_ToTable">
+          <End Type="VAMInsuranceBot.Models.client" Role="client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="VAMInsuranceBot.Models.verification" Role="verification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="verification">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCD_policy_client_ToTable">
+          <End Type="VAMInsuranceBot.Models.client" Role="client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="VAMInsuranceBot.Models.policy" Role="policy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="policy">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_renew_policy_ToTable">
+          <End Type="VAMInsuranceBot.Models.policy" Role="policy" Multiplicity="1" />
+          <End Type="VAMInsuranceBot.Models.renew" Role="renew" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="policy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="renew">
+              <PropertyRef Name="PId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VAMInsuranceBotModelsStoreContainer" CdmEntityContainer="ModelEntities">
+          <EntitySetMapping Name="accidents">
+            <EntityTypeMapping TypeName="VAMInsuranceBot.Models.accident">
+              <MappingFragment StoreEntitySet="accident">
+                <ScalarProperty Name="Third_Party" ColumnName="Third Party" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="claims">
+            <EntityTypeMapping TypeName="VAMInsuranceBot.Models.claim">
+              <MappingFragment StoreEntitySet="claim">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Claim_Date" ColumnName="Claim Date" />
+                <ScalarProperty Name="Claim_Number" ColumnName="Claim Number" />
+                <ScalarProperty Name="PId" ColumnName="PId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clients">
+            <EntityTypeMapping TypeName="VAMInsuranceBot.Models.client">
+              <MappingFragment StoreEntitySet="client">
+                <ScalarProperty Name="PAN_Number" ColumnName="PAN Number" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone Number" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Date_of_Birth" ColumnName="Date of Birth" />
+                <ScalarProperty Name="Father_s_Name" ColumnName="Father's Name" />
+                <ScalarProperty Name="Pin" ColumnName="Pin" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="drivers">
+            <EntityTypeMapping TypeName="VAMInsuranceBot.Models.driver">
+              <MappingFragment StoreEntitySet="driver">
+                <ScalarProperty Name="Injured" ColumnName="Injured" />
+                <ScalarProperty Name="License_Number" ColumnName="License Number" />
+                <ScalarProperty Name="Relation" ColumnName="Relation" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="policies">
+            <EntityTypeMapping TypeName="VAMInsuranceBot.Models.policy">
+              <MappingFragment StoreEntitySet="policy">
+                <ScalarProperty Name="Renew_Filed" ColumnName="Renew Filed" />
+                <ScalarProperty Name="Claim_Filed" ColumnName="Claim Filed" />
+                <ScalarProperty Name="Date_of_Expiration" ColumnName="Date of Expiration" />
+                <ScalarProperty Name="Starting_Date" ColumnName="Starting Date" />
+                <ScalarProperty Name="Policy_Type" ColumnName="Policy Type" />
+                <ScalarProperty Name="Policy_Number" ColumnName="Policy Number" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="renews">
+            <EntityTypeMapping TypeName="VAMInsuranceBot.Models.renew">
+              <MappingFragment StoreEntitySet="renew">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Renewal_Number" ColumnName="Renewal Number" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PId" ColumnName="PId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="thefts">
+            <EntityTypeMapping TypeName="VAMInsuranceBot.Models.theft">
+              <MappingFragment StoreEntitySet="theft">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="third_party">
+            <EntityTypeMapping TypeName="VAMInsuranceBot.Models.third_party">
+              <MappingFragment StoreEntitySet="third_party">
+                <ScalarProperty Name="FIR_Filed" ColumnName="FIR Filed" />
+                <ScalarProperty Name="Injured" ColumnName="Injured" />
+                <ScalarProperty Name="License_Number" ColumnName="License Number" />
+                <ScalarProperty Name="Registration_Number" ColumnName="Registration Number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vehicles">
+            <EntityTypeMapping TypeName="VAMInsuranceBot.Models.vehicle">
+              <MappingFragment StoreEntitySet="vehicle">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Registration_Number" ColumnName="Registration Number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="verifications">
+            <EntityTypeMapping TypeName="VAMInsuranceBot.Models.verification">
+              <MappingFragment StoreEntitySet="verification">
+                <ScalarProperty Name="time_stamp" ColumnName="time_stamp" />
+                <ScalarProperty Name="ver_status" ColumnName="ver_status" />
+                <ScalarProperty Name="otp" ColumnName="otp" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

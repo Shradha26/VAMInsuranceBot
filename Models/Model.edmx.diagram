@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="71552c8140db45dc900fc119138bdad6" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="VAMInsuranceBot.Models.accident" Width="1.5" PointX="5.25" PointY="3.875" />
+        <EntityTypeShape EntityType="VAMInsuranceBot.Models.claim" Width="1.5" PointX="5.25" PointY="7.125" />
+        <EntityTypeShape EntityType="VAMInsuranceBot.Models.client" Width="1.5" PointX="0.75" PointY="8.25" />
+        <EntityTypeShape EntityType="VAMInsuranceBot.Models.driver" Width="1.5" PointX="7.5" PointY="5.125" />
+        <EntityTypeShape EntityType="VAMInsuranceBot.Models.policy" Width="1.5" PointX="3" PointY="4.25" />
+        <EntityTypeShape EntityType="VAMInsuranceBot.Models.renew" Width="1.5" PointX="2.625" PointY="9.375" />
+        <EntityTypeShape EntityType="VAMInsuranceBot.Models.theft" Width="1.5" PointX="5.25" PointY="11.5" />
+        <EntityTypeShape EntityType="VAMInsuranceBot.Models.third_party" Width="1.5" PointX="7.5" PointY="7.625" />
+        <EntityTypeShape EntityType="VAMInsuranceBot.Models.vehicle" Width="1.5" PointX="7.5" PointY="10.125" />
+        <EntityTypeShape EntityType="VAMInsuranceBot.Models.verification" Width="1.5" PointX="2.625" PointY="12.25" />
+        <AssociationConnector Association="VAMInsuranceBot.Models.FK_accident_claim_ToTable" />
+        <AssociationConnector Association="VAMInsuranceBot.Models.FK_claim_policy_ToTable" />
+        <AssociationConnector Association="VAMInsuranceBot.Models.FK_driver_claim_ToTable" />
+        <AssociationConnector Association="VAMInsuranceBot.Models.FK_theft_claim_ToTable" />
+        <AssociationConnector Association="VAMInsuranceBot.Models.FK_third_party_claim_ToTable" />
+        <AssociationConnector Association="VAMInsuranceBot.Models.FK_vehicle_claim_ToTable" />
+        <AssociationConnector Association="VAMInsuranceBot.Models.FK_verification_data_client_ToTable" />
+        <AssociationConnector Association="VAMInsuranceBot.Models.FKCD_policy_client_ToTable" />
+        <AssociationConnector Association="VAMInsuranceBot.Models.FK_renew_policy_ToTable" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
